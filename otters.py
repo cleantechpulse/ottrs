@@ -55,7 +55,7 @@ def home():
 
 
     print("I'm handling the front-end!")
-    return render_template('home.html')
+    return render_template('home.html',onethread=int(app.config['ONETHREAD']))
 
 
 # Handler for user updates 
@@ -97,18 +97,22 @@ def subscribe():
 # Handler for listening to backend
 @app.route("/timer")
 def timerHandler():
-    def gen():  # When this function is run, a subscription is added to the queue and 
-        q = Queue()
-        timerListeners.append(q)
-        try:
-            while True:
-                result = q.get()  # This will block until an item is available, then loop around and wait for the next item to pop into the queue
-                ev = ServerSentEvent(str(result))
-                yield ev.encode()
-        except GeneratorExit: # Or maybe use flask signals
-            timerListeners.remove(q)
-            print("Generator exited!")
-    return Response(gen(), mimetype="text/event-stream")
+    if app.config['WEMO']:
+        def gen():  # When this function is run, a subscription is added to the queue and 
+            q = Queue()
+            timerListeners.append(q)
+            try:
+                while True:
+                    result = q.get()  # This will block until an item is available, then loop around and wait for the next item to pop into the queue
+                    ev = ServerSentEvent(str(result))
+                    yield ev.encode()
+            except GeneratorExit: # Or maybe use flask signals
+                timerListeners.remove(q)
+                print("Generator exited!")
+        return Response(gen(), mimetype="text/event-stream")
+
+    else:
+        return ('', 204)
 
 
 

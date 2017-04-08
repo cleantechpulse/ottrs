@@ -142,6 +142,7 @@
 <script type=text/javascript>
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
+    var dontWaitForBackend = Boolean({{onethread}})
     var hourNumber = 0;
     var simulationData = [1, 2, 3, 4, 5];// 6, 7, 8];//, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,21,22,23,24];
     var timeout = 3000;
@@ -152,8 +153,10 @@
         if (hourNumber < simulationData.length){
             ++hourNumber;
         }
-        // if (++hourNumber >= simulationData.length)
-        //     hourNumber = 0
+        if( dontWaitForBackend ){
+            if (hourNumber >= simulationData.length)
+                hourNumber = 0
+        }
     }
     vizLoopInterval = setInterval(updateViz,timeout);  // Set the visualization to run automatically
 

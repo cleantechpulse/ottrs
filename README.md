@@ -32,5 +32,4 @@ When creating a new app...
 This assumes that you're using the command line:
 - Create app with `$ heroku create myawesomeapp` where your actual app name replaces `myawesomeapp`
 - Set environment with `$ heroku config:set APP_SETTINGS=config.HerokuConfig`
-- Set buildpack with `$heroku buildpacks:set heroku/python`
 - Set dyno scale with `$ heroku ps:scale web=1`

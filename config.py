@@ -1,4 +1,6 @@
 class Config(object):
+	ONETHREAD = True
+	WEMO   = False
 	HEROKU = False
 	DEBUG = False
 	TESTING = False
@@ -11,6 +13,14 @@ class HerokuConfig(Config):
 	DEBUG       = False
 	ETHEREUM    = False
 	ETHNETWORK  = False
+
+class LocalWemo(Config):
+	ONETHREAD = False
+	WEMO = True
+	DEVELOPMENT = True
+	DEBUG       = True
+	ETHEREUM    = False
+	ETHNETWORK  = False	
 
 class LocalNoEthereum(Config):
 	DEVELOPMENT = True
@@ -25,6 +35,7 @@ class LocalEthereumNoNetwork(Config):
 	ETHNETWORK  = False
 
 class LocalEthereumNetwork(Config):
+	ONETHREAD   = False
 	DEVELOPMENT = True
 	DEBUG       = True
 	ETHEREUM    = True

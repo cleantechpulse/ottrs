@@ -55,7 +55,7 @@
 
     <section>
         <div class="container">
-            <h1>Awesome Power Flow Simulation</h1><div id="event"></div>
+            <h1>Awesome Power Flow Simulation</h1><div id="event"><div id="timer"></div></div>
             <p>Run through the ABCs between letter <input class="numberinput" type=text size=1 value=1 name=a> and 
                <input class="numberinput" type=text size=5 value=5 name=b>
                <span style="padding-left:5em" id=result>0</span>
@@ -143,20 +143,27 @@
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 
     var hourNumber = 0;
-    var simulationData = ['A', 'B', 'C', 'D', 'E'];
-    var timeout = 1000;
+    var simulationData = [1, 2, 3, 4, 5];// 6, 7, 8];//, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,21,22,23,24];
+    var timeout = 3000;
 
     // Repeatedly update the visualization, stepping through hours of the day
     function updateViz(){   
         $("#result").text(simulationData[hourNumber]);
-        if (++hourNumber >= simulationData.length)
-            hourNumber = 0
+        if (hourNumber < simulationData.length){
+            ++hourNumber;
+        }
+        // if (++hourNumber >= simulationData.length)
+        //     hourNumber = 0
     }
-    setInterval(updateViz,timeout);  // Set the visualization to run automatically
+    vizLoopInterval = setInterval(updateViz,timeout);  // Set the visualization to run automatically
 
     // Handle update messages from the back-end
     var eventOutputContainer = document.getElementById("event");
     var evtSrc = new EventSource("/subscribe");
+
+    // Handle update messages from the back-end
+    var timerOutputContainer = document.getElementById("timer");
+    var resetTimer = new EventSource("/timer");
 
     evtSrc.onmessage = function(e) {
         console.log(e.data);
@@ -164,6 +171,13 @@
         simulationData = JSON.parse(e.data)['result'];
         console.log(typeof(simulationData))
      };
+
+     resetTimer.onmessage = function(e){
+        console.log(e.data)
+        hourNumber=0;
+        clearInterval(vizLoopInterval)
+        vizLoopInterval = setInterval(updateViz,timeout);
+     }
 
     // Main functionality
     function getValOr0(namestring){

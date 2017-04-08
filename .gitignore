@@ -4,3 +4,4 @@ env/
 
 client/node_modules
 client/npm-debug.log
+*.pyc

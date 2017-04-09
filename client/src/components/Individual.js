@@ -89,7 +89,7 @@ class IndividualWrapper extends Component {
 
     return (<div className="row">
       <div className="col-xs-12">
-        <h1> Node {this.props.node} </h1><div onClick={this.props.onMountFunc} className="link graph-start">Start</div>
+        <h1> Power Consumption at Node {this.props.node} </h1><div onClick={this.props.onMountFunc} className="link graph-start">Start</div>
         <div className="wrapper">
           <div className="legends">
             <div className="battery"><span className="color"></span>Battery</div>

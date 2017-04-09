@@ -6,11 +6,8 @@ import AppWrapper from '../components/App'
 const flowData = require('../data/flow_to_parent.json');
 const dendogram = require('../data/dendogram.json');
 
-// console.log(flowData.length);
-
 const mapStateToProps = (state, ownProps) => {
   return {
-    isFetching: state.isFetching,
     currentHour: state.currentHour,
     playStatus: state.playStatus,
     selectedNode: state.selectedNode
@@ -36,7 +33,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const data = _.map(dendogram, (d) => {
     const ids = d.split('-');
     const lastId = +ids[ids.length - 1];
-    return {id: d, value: flowData[lastId] };
+    return {id: d, value: flowData[lastId - 1] };
   });
 
   //get max value (absolute value of the power to parent)
@@ -48,7 +45,6 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   });
 
   const mergedProps = {
-    isFetching: stateProps.isFetching,
     currentHour: stateProps.currentHour,
     playStatus: stateProps.playStatus,
     selectedNode: stateProps.selectedNode,
@@ -69,6 +65,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     },
     onSelectNode: (id) => {
       dispatchProps.selectNode(id);
+      dispatchProps.setPlay(0);
+      dispatchProps.addHour(-1);
     }
   };
   return Object.assign({}, mergedProps);

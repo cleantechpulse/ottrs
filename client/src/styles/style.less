@@ -54,7 +54,7 @@ body {
 }
 .connetion {
   fill: none;
-  stroke: @oc-gray-4;
+  stroke: @oc-gray-5;
   stroke-linecap: round;
 }
 
@@ -82,11 +82,78 @@ body {
   text-anchor: middle;
 }
 
+@c-sh: @oc-orange-8;
+@c-d: @oc-blue-8;
+@c-b: @oc-green-8;
+@c-s: @oc-pink-8;
+
 .individual-curve-shapeable {
-  stroke: @oc-orange-8;
+  stroke: @c-sh;
   fill: fade(@oc-orange-8, 10%);
 }
 .individual-curve-deferrable {
-  stroke: @oc-blue-8;
+  stroke: @c-d;
   fill: fade(@oc-blue-8, 10%);
+}
+.individual-curve-batt {
+  stroke: @c-b;
+  fill: fade(@oc-green-8, 10%);
+}
+.individual-curve-solar {
+  stroke: @c-s;
+  fill: fade(@oc-pink-8, 10%);
+}
+
+h1 {
+  margin-left: -15px;
+  padding-left: 0;
+  display: inline-block;
+}
+h3 {
+  padding-top: 0;
+  margin-top: 0;
+}
+.clock, .buttons {
+  display: inline-block;
+}
+.buttons {
+  margin-left: 15px;
+}
+.legends {
+  display: flex;
+  div {
+    margin-right: 15px;
+    margin-top: 4px;
+    display: flex;
+  }
+  span {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  .shapeable .color {
+    background-color: @c-sh;
+  }
+  .deferrable .color {
+    background-color: @c-d;
+  }
+  .solar .color {
+    background-color: @c-s;
+  }
+  .battery .color {
+    background-color: @c-b;
+  }
+}
+.timer {
+  stroke-width: 2px;
+  stroke: @oc-gray-9;
+}
+.y-label {
+  text-anchor: middle;
+}
+.graph-start {
+  display: inline-block;
+  margin-left: 15px;
+  color: @oc-gray-4;
 }

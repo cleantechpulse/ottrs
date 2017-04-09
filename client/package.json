@@ -7,7 +7,8 @@
     "build-css": "lessc src/styles/style.less src/styles/style.css",
     "watch-css": "npm run build-css && less-watch-compiler src/styles src/styles style.less",
     "start-js": "react-scripts start",
-    "start": "concurrently \"npm run watch-css\" \"npm run start-js\""
+    "start": "concurrently \"npm run watch-css\" \"npm run start-js\"",
+    "build": "react-scripts build"
   },
   "repository": {
     "type": "git",

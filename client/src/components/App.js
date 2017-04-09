@@ -12,9 +12,9 @@ class AppWrapper extends Component {
     this.margin = {top: 10, right: 40, bottom: 20, left: 40};
     this.dim = {
       w: containerW - this.margin.left - this.margin.right,
-      h: 300 - this.margin.top - this.margin.bottom
+      h: 600 - this.margin.top - this.margin.bottom
     };
-    this.widthRange = d3.scaleLinear().range([0, 40]);
+    this.widthRange = d3.scaleLinear().range([0, 20]);
   }
 
   componentDidMount() {
@@ -63,8 +63,6 @@ class AppWrapper extends Component {
         .on('click', (d) => {
           const ids = d.data.id.split('-');
           this.props.onSelectNode(+ids[ids.length - 1]);
-
-          // browserHistory.push(`/${ids[ids.length - 1]}`);
         });
 
     node.append('text')
@@ -74,7 +72,7 @@ class AppWrapper extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.playStatus === 1) {
-      _.delay(() => this.props.onStartFunc(), 1000);
+      _.delay(() => this.props.onStartFunc(), 3000);
     }
     //TODO: animation
     d3.selectAll('.js-link')
@@ -87,10 +85,12 @@ class AppWrapper extends Component {
         <div className='col-xs-12'>
           <h1> Power Flow </h1>
           <div className='wrapper'>
-            <h3>{getCurrentHourText(this.props.currentHour)}</h3>
-            <div onClick={this.props.onMountFunc} className={this.props.playStatus === 0 ? 'link' : 'hidden'}>Start</div>
-            <div onClick={this.props.onStopFunc} className={this.props.playStatus === 1 ? 'link' : 'hidden'}>Stop</div>
-            <div onClick={this.props.onResumeFunc} className={this.props.playStatus === 2 ? 'link' : 'hidden'}>Resume</div>
+            <h3 className="clock">{getCurrentHourText(this.props.currentHour)}</h3>
+            <div className="buttons">
+              <div onClick={this.props.onMountFunc} className={this.props.playStatus === 0 ? 'link' : 'hidden'}>Start</div>
+              <div onClick={this.props.onStopFunc} className={this.props.playStatus === 1 ? 'link' : 'hidden'}>Stop</div>
+              <div onClick={this.props.onResumeFunc} className={this.props.playStatus === 2 ? 'link' : 'hidden'}>Resume</div>
+            </div>
             <svg
               width={this.dim.w + this.margin.left + this.margin.right}
               height={this.dim.h + this.margin.top + this.margin.bottom}

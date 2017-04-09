@@ -3,12 +3,12 @@
 
 ## Local setup
 
-- Clone github repository into a newly created folder: `$ git clone https://github.com/emunsing/flaskblockchain.git` 
+- Clone github repository into a newly created folder: `$ git clone https://github.com/emunsing/flaskblockchain.git`
 - Create virtual environment by running `$ virtualenv env`
 - Set environment variables by running  `$ source .env`
-- Install required Python packages with `$ pip install -r requirements.txt
+- Install required Python packages with `$ pip install -r requirements.txt`
 - Associate heroku repository by running`$ git remote add heroku git@heroku.com:flaskblockchain.git`
-- Run a local server with `$ python flaskblockchain.py`
+- Run a local server with `$ python otters.py`
 - Go to http://localhost:5000 and see results!
 
 
@@ -23,10 +23,10 @@ Required for Heroku:
 - runtime.txt: Specify the Python runtime environment
 - Procfile: Required by Heroku to indicate the type of dyno to spin up, and what to run
 
-# Notes: 
+# Notes:
 
 When creating a new app...
-- In addition to installing Flask and other requirements, be sure to install 
+- In addition to installing Flask and other requirements, be sure to install
 
 ## Setting up Heroku (one-time; should be done)
 This assumes that you're using the command line:

@@ -16,6 +16,7 @@ for d in devices:
 
 lights['batt'].turn_off()
 
+
 n = data.index[-1]+1
 
 maxVals = data.abs().max(axis=0)
@@ -25,6 +26,8 @@ oldBattCharging = (data.loc[0,'batt']<0)
 
 oldSwitchState = False
 bulb_output = data / maxVals * maxBrightness
+
+raw_input("Press Enter to continue...")
 
 for i in range(n):
     loopLength = 3 # seconds
@@ -47,6 +50,7 @@ for i in range(n):
             lights['batt'].set_temperature(kelvin=6500,transition=0.01,delay=False)
         else:
             lights['batt'].set_temperature(kelvin=2700,transition=0.01,delay=False)
+        # oldBattCharging = battCharging
         
     for type in ['solar','shape','batt']:
         try:

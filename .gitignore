@@ -1,7 +1,7 @@
 # .env
 env/
-.DS_Store
 
+.DS_Store
 client/node_modules
 client/npm-debug.log
 *.pyc

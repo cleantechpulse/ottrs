@@ -83,7 +83,7 @@ class AppWrapper extends Component {
     return (<div className='container'>
       <div className='row'>
         <div className='col-xs-12'>
-          <h1> Power Flow </h1>
+          <h1> Distribution Grid Power Flow</h1>
           <div className='wrapper'>
             <h3 className="clock">{getCurrentHourText(this.props.currentHour)}</h3>
             <div className="buttons">
